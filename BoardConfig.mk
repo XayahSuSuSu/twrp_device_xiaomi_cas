@@ -75,6 +75,8 @@ TW_THEME := portrait_hdpi
 TW_EXTRA_LANGUAGES := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_TOOLBOX := true
+TW_Y_OFFSET := 90
+TW_H_OFFSET := -90
 PLATFORM_VERSION := 16.1.0
 
 # Vendor
