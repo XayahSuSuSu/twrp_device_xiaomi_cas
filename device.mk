@@ -5,3 +5,6 @@
 #
 
 LOCAL_PATH := device/xiaomi/cas
+
+# Dynamic Partition
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
