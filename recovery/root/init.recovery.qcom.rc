@@ -26,7 +26,6 @@
 #
 
 on init
-    write /sys/class/backlight/panel0-backlight/brightness 200
     setprop sys.usb.configfs 1
     start hwservicemanager
     setprop crypto.ready 1
