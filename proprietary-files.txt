@@ -51,3 +51,9 @@ vendor/lib64/vendor.display.config@1.1.so
 vendor/lib64/vendor.qti.hardware.tui_comm@1.0.so
 
 vendor/lib64/hw/android.hardware.gatekeeper@1.0-impl-qti.so
+
+# Vibrator
+vendor/firmware/aw8697_haptic.bin
+vendor/firmware/aw8697_rtp_1.bin
+vendor/bin/hw/vendor.qti.hardware.vibrator@1.2-service
+
