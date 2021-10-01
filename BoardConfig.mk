@@ -101,6 +101,10 @@ QCOM_BOARD_PLATFORMS += kona
 # Recovery
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 
+# SAR
+BOARD_ROOT_EXTRA_FOLDERS := bluetooth dsp firmware persist
+BOARD_SUPPRESS_SECURE_ERASE := true
+
 # TWRP
 TW_THEME := portrait_hdpi
 TW_EXTRA_LANGUAGES := true
