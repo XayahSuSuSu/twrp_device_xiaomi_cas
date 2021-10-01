@@ -1,5 +1,5 @@
 # mount point    fstype                  device                             device2                                             flags
-/metadata         ext4     /dev/block/bootdevice/by-name/metadata                                        flags=display="Metadata";backup=1;wrappedkey
+/metadata         ext4     /dev/block/bootdevice/by-name/metadata                                        flags=display="Metadata";backup=1
 /data             f2fs     /dev/block/bootdevice/by-name/userdata                                        flags=display="Data"
 /persist          ext4     /dev/block/bootdevice/by-name/persist                                         flags=display="Persist"
 /persist_image    emmc     /dev/block/bootdevice/by-name/persist                                         flags=display="Persist";backup=1;flashimg=1
