@@ -25,6 +25,11 @@ PRODUCT_COPY_FILES += \
 # API
 PRODUCT_SHIPPING_API_LEVEL := 29
 
+# Crypto
+PRODUCT_PACKAGES += \
+    qcom_decrypt \
+    qcom_decrypt_fbe
+
 # Dynamic Partition
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
