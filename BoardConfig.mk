@@ -53,22 +53,18 @@ TARGET_NO_BOOTLOADER := true
 TARGET_USES_UEFI := true
 
 # Crypto
-PLATFORM_VERSION := 127
 TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_CRYPTO_FBE := true
 TW_INCLUDE_FBE_METADATA_DECRYPT := true
-PLATFORM_SECURITY_PATCH := 2127-12-31
-VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
-TW_USE_FSCRYPT_POLICY := 1
+BOARD_USES_QCOM_FBE_DECRYPTION := true
+BOARD_USES_METADATA_PARTITION := true
 
 BOARD_USES_METADATA_PARTITION := true
 BOARD_ROOT_EXTRA_FOLDERS += metadata
 
-# Dynamic Partition
-BOARD_SUPER_PARTITION_SIZE := 9126805504
-BOARD_SUPER_PARTITION_GROUPS := qti_dynamic_partitions
-BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST := system system_ext product odm vendor
-BOARD_QTI_DYNAMIC_PARTITIONS_SIZE := 9122611200
+# DTB
+BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+BOARD_BOOT_HEADER_VERSION := 2
 
 # Extras props
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
@@ -80,25 +76,24 @@ TARGET_USERIMAGES_USE_F2FS := true
 
 # Kernel
 BOARD_KERNEL_CMDLINE := \
-	console=ttyMSM0,115200n8 \
-	androidboot.hardware=qcom \
-	androidboot.console=ttyMSM0 \
-	androidboot.memcg=1 \
-	lpm_levels.sleep_disabled=1 \
-	video=vfb:640x400,bpp=32,memsize=3072000 \
-	msm_rtb.filter=0x237 \
-	service_locator.enable=1 \
-	androidboot.usbcontroller=a600000.dwc3 \
-	swiotlb=2048 \
-	androidboot.boot_devices=soc/1d84000.ufshc \
-	cgroup.memory=nokmem,nosocket \
-	androidboot.init_fatal_reboot_target=recovery \
-	androidboot.fastboot=1 \
+    androidboot.console=ttyMSM0 \
+    androidboot.hardware=qcom \
+    androidboot.init_fatal_reboot_target=recovery \
+    androidboot.memcg=1 \
+    androidboot.usbcontroller=a600000.dwc3 \
+    cgroup.memory=nokmem,nosocket \
+    console=ttyMSM0,115200n8 \
+    earlycon=msm_geni_serial,0xa90000 \
+    loop.max_part=7 \
+    msm_rtb.filter=0x237 \
+    reboot=panic_warm \
+    service_locator.enable=1 \
+    swiotlb=2048 \
+    androidboot.usbconfigfs=true \
 	androidboot.selinux=permissive
 
 BOARD_KERNEL_IMAGE_NAME    := Image
 BOARD_KERNEL_PAGESIZE      := 4096
-BOARD_BOOT_HEADER_VERSION  := 2
 BOARD_KERNEL_BASE          := 0x00000000
 BOARD_KERNEL_TAGS_OFFSET   := 0x00000100
 BOARD_KERNEL_OFFSET        := 0x00008000
@@ -110,7 +105,6 @@ TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel.img
 BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
 BOARD_PREBUILT_DTBIMAGE_DIR := $(DEVICE_PATH)/prebuilt/dtb
 BOARD_INCLUDE_RECOVERY_DTBO := true
-BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 
 BOARD_MKBOOTIMG_ARGS += \
 	--base $(BOARD_KERNEL_BASE) \
@@ -123,64 +117,71 @@ BOARD_MKBOOTIMG_ARGS += \
 	--header_version $(BOARD_BOOT_HEADER_VERSION)
 
 # Partitions
-BOARD_FLASH_BLOCK_SIZE := 262144
 BOARD_BOOTIMAGE_PARTITION_SIZE := 134217728
+BOARD_CACHEIMAGE_PARTITION_SIZE := 402653184
+BOARD_DTBOIMG_PARTITION_SIZE := 33554432
+BOARD_FLASH_BLOCK_SIZE := 262144
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 134217728
 
+BOARD_SUPER_PARTITION_SIZE := 9126805504
+BOARD_SUPER_PARTITION_GROUPS := qti_dynamic_partitions
+BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST := system system_ext product odm vendor
+BOARD_QTI_DYNAMIC_PARTITIONS_SIZE := 9122611200
+
+BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_ODMIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
+
+TARGET_COPY_OUT_ODM := odm
+TARGET_COPY_OUT_PRODUCT := product
+TARGET_COPY_OUT_SYSTEM_EXT := system_ext
+TARGET_COPY_OUT_VENDOR := vendor
+
+BOARD_SUPPRESS_SECURE_ERASE := true
+
 # Platform
+BOARD_VENDOR := xiaomi
+BOARD_USES_QCOM_HARDWARE := true
 TARGET_BOARD_PLATFORM := kona
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno650
-QCOM_BOARD_PLATFORMS += kona
 
 # Recovery
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
 
-# SAR
-BOARD_ROOT_EXTRA_FOLDERS += \
-	bluetooth \
-	cache \
-	bt_firmware \
-	dsp \
-	firmware \
-	persist \
-	cust
-BOARD_SUPPRESS_SECURE_ERASE := true
+# Security patch level
+PLATFORM_SECURITY_PATCH := 2127-12-31
+VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
+PLATFORM_VERSION := 127
+PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
 
 # The path to a temperature sensor
 TW_CUSTOM_CPU_TEMP_PATH := "/sys/devices/virtual/thermal/thermal_zone19/temp"
-TW_QCOM_ATS_OFFSET := 1643101352000
-TW_EXCLUDE_LPDUMP := true
-TW_EXCLUDE_LPTOOLS := true
 
 # TWRP
 TW_THEME := portrait_hdpi
 RECOVERY_SDCARD_ON_DATA := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file
 TW_EXCLUDE_DEFAULT_USB_INIT := true
+TW_EXCLUDE_ENCRYPTED_BACKUPS := false
 TW_EXTRA_LANGUAGES := true
 TW_INCLUDE_NTFS_3G := true
 TW_USE_TOOLBOX := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel0-backlight/brightness"
 TW_MAX_BRIGHTNESS := 2047
-TW_DEFAULT_BRIGHTNESS := 1200
 TWRP_INCLUDE_LOGCAT := true
 TARGET_USES_LOGD := true
-TARGET_USES_MKE2FS := true
-TW_EXCLUDE_TWRPAPP := true
-TW_HAS_EDL_MODE := true
-TW_SUPPORT_INPUT_1_2_HAPTICS := true
 TW_NO_SCREEN_BLANK := true
+TW_HAS_EDL_MODE := false
+TW_SUPPORT_INPUT_1_2_HAPTICS := true
 TW_Y_OFFSET := 90
 TW_H_OFFSET := -90
 TW_DEVICE_VERSION := Xayah
 
-# Workaround for error copying vendor files to recovery ramdisk
-BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
-TARGET_COPY_OUT_PRODUCT := product
-TARGET_COPY_OUT_SYSTEM_EXT := system_ext
-TARGET_COPY_OUT_VENDOR := vendor
+TW_INCLUDE_REPACKTOOLS := true
+TW_INCLUDE_RESETPROP := true
+TW_INCLUDE_LIBRESETPROP :=true
