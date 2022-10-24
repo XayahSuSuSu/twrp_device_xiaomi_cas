@@ -5,25 +5,18 @@ The Xiaomi MI 10 Ultra (codenamed _"cas"_) is a high-end smartphone from Xiaomi.
 
 It was announced on August 2020. Release date was August 2020.
 
-Kernel and all blobs are extracted from [miui_CAS_V12.0.15.0.QJJCNXM_5abfb26bdb_10.0.zip](https://bigota.d.miui.com/V12.0.15.0.QJJCNXM/miui_CAS_V12.0.15.0.QJJCNXM_5abfb26bdb_10.0.zip) firmware.
+Kernel and all blobs are extracted from [miui_CAS_V13.0.5.0.SJJCNXM_de6e6c4571_12.0.zip](https://bigota.d.miui.com/V13.0.5.0.SJJCNXM/miui_CAS_V13.0.5.0.SJJCNXM_de6e6c4571_12.0.zip) firmware.
 
 :sparkling_heart: Thanks [@yarpiin](https://github.com/yarpiin)
 
 # Works:
-- **Decryption**(Support **pattern/pin**, tested on **V12.5.6** and **21.9.27**)
+- **Decryption, tested on MIUI V13.0.5.0(Android 12) && Custom Roms(Android 13)**
 - MTP/ADB
 - Fastbootd
 - ADB Sideload
 - Vibration
+- **Transfer for big files(>= 4GB)**
 - ...
-
-# Features:
-- **Android 11 Support**
-- Magisk-v23.0 included
-- Prevent from replacing TWRP with stock recovery
-- DTBO Patch
-- **[Support for flashing rom(>=4GB)](https://github.com/xiangfeidexiaohuo/rec4Gota)**
-- Enable /cache partition
 
 # Device specifications
 
