@@ -10,7 +10,7 @@ Kernel and all blobs are extracted from [miui_CAS_V13.0.5.0.SJJCNXM_de6e6c4571_1
 :sparkling_heart: Thanks [@yarpiin](https://github.com/yarpiin)
 
 # Works:
-- **Decryption, tested on MIUI V13.0.5.0(Android 12) && Custom Roms(Android 13)**
+- **Decryption, tested on MIUI V13.0.5.0(Android 12) && AOSP Roms(Android 12/13 with [wrapped key support](https://github.com/orgs/AcmeUI/projects/7) only)**
 - MTP/ADB
 - Fastbootd
 - ADB Sideload
