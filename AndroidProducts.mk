@@ -5,9 +5,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/omni_cas.mk
+    $(LOCAL_DIR)/omni_NX659J.mk
 
 COMMON_LUNCH_CHOICES := \
-    omni_cas-user \
-    omni_cas-userdebug \
-    omni_cas-eng
+    omni_NX659J-user \
+    omni_NX659J-userdebug \
+    omni_NX659J-eng
